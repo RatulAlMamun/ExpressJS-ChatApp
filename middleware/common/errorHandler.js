@@ -8,9 +8,21 @@ function notFoundHandler(req, res, next) {
 
 // default error handler
 function errorHandler(err, req, res, next) {
-  res.render("error", {
-    title: "Error page",
-  });
+  // set the error message based on environment
+  res.locals.error =
+    process.env.NODE_ENV === "development" ? err : { message: err.message };
+  res.status(err.status || 500);
+
+  // check wheather the response will be json or html template
+  if (res.locals.html) {
+    // html response
+    res.render("error", {
+      title: "Error Page",
+    });
+  } else {
+    // json response
+    res.json(res.locals.error);
+  }
 }
 
 module.exports = {

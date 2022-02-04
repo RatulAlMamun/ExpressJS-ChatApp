@@ -7,6 +7,8 @@
     <title><%= title %></title>
 </head>
 <body>
-    This is error page.
+    <h2 style="color: rgba(224, 15, 15, 0.849);">Error: <%= error.message %></h2>
+    <p style="color: rgb(114, 42, 42);">Status: <%= error.status %></p>
+    <p style="color: rgb(230, 104, 104);width: 50%;"><%= error.stack %></p>
 </body>
 </html>
