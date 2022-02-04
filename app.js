@@ -5,6 +5,11 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 
+const {
+  notFoundHandler,
+  errorHandler,
+} = require("./middleware/common/errorHandler");
+
 // intiating express object
 const app = express();
 
@@ -35,7 +40,11 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 
 // routing setup
 
-// error handling
+// 404 - not found error handler
+app.use(notFoundHandler);
+
+// common error handler
+app.use(errorHandler);
 
 // port setup
 app.listen(process.env.PORT, () => {
