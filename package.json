@@ -4,7 +4,8 @@
   "description": "Chat Application - an expressJS practice project.",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "NODE_ENV=development nodemon app.js",
+    "prod": "NODE_ENV=production node app.js"
   },
   "repository": {
     "type": "git",
