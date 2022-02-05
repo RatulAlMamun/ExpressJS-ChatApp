@@ -3,7 +3,7 @@ function decorateHtmlResponse(pageTitle) {
   // return the middleware
   return function (req, res, next) {
     // template page title
-    res.locals.title = pageTitle;
+    res.locals.title = `${pageTitle} | ${process.env.APP_NAME}`;
 
     // flag for response decision - template or json
     res.locals.html = true;
