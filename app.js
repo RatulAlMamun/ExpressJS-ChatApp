@@ -19,15 +19,6 @@ const app = express();
 // dotenv package configuration
 dotenv.config();
 
-// database connection
-mongoose
-  .connect(process.env.MONGO_CONNECTION_STRING, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log("Database connection successfull."))
-  .catch((err) => console.log(err));
-
 // request parsers
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -52,7 +43,17 @@ app.use(notFoundHandler);
 // common error handler
 app.use(errorHandler);
 
-// port setup
-app.listen(process.env.PORT, () => {
-  console.log(`app listening to port ${process.env.PORT}`);
-});
+// database connection
+mongoose
+  .connect(process.env.MONGO_CONNECTION_STRING, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("Database connection successfull.");
+    // port listening
+    app.listen(process.env.PORT, () => {
+      console.log(`app listening to port ${process.env.PORT}`);
+    });
+  })
+  .catch((err) => console.log(err));
