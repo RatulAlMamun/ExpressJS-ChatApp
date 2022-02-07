@@ -1,6 +1,6 @@
 // dependencies import
 const express = require("express");
-const { getUsers } = require("../controller/usersController");
+const { getUsers, addUser } = require("../controller/usersController");
 const avatarUpload = require("../middleware/users/avatarUpload");
 const {
   addUserValidator,
@@ -16,8 +16,14 @@ const router = express.Router();
 // route
 router.get("/", decorateHtmlResponse("Users"), getUsers);
 
-// user registration
-router.post("/", avatarUpload, addUserValidator, addUserValidationHandler);
+// add user
+router.post(
+  "/",
+  avatarUpload,
+  addUserValidator,
+  addUserValidationHandler,
+  addUser
+);
 
 // export routes
 module.exports = router;
