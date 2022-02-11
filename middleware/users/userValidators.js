@@ -2,6 +2,7 @@
 const path = require("path");
 const { unlink } = require("fs");
 const createError = require("http-errors");
+const User = require("../../models/People");
 const { check, validationResult } = require("express-validator");
 
 // user field validation array

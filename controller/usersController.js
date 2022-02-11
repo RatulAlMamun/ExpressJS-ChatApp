@@ -1,5 +1,6 @@
 // dependencies
 const bcrypt = require("bcrypt");
+const User = require("../models/People");
 
 // users template rendering
 function getUsers(req, res) {
