@@ -31,7 +31,7 @@
                 </td>
                 <td><%= user.email %></td>
                 <td class="manage">
-                  <img src="./images/trash.png" alt="Delete" />
+                  <img src="./images/trash.png" alt="Delete" onclick="deleteUser('<%= user._id %>')"/>
                 </td>
               </tr>
             <% }); %>
@@ -41,6 +41,32 @@
     </div>
 
     <%- include('./includes/add-user-modal') %>
+
+    <script>
+      // toasts
+      const deleteToast = Toastify({
+          text: "User was deleted successfully!",
+          duration: 3000,
+      });
+      const deleteErrorToast = Toastify({
+          text: "Could not delete the user!",
+          duration: 3000,
+      });
+      
+      // delete user function
+      async function deleteUser(userId) {
+          let response = await fetch(`/users/${userId}`, {
+              method: "DELETE",
+          });
+          let result = await response.json();
+          if (result.errors) {
+              deleteErrorToast.showToast();
+          } else {
+              deleteToast.showToast();
+              document.getElementById(userId).remove();
+          }
+      }
+  </script>
 
   </body>
 </html>

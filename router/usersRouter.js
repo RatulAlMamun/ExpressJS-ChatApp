@@ -1,6 +1,6 @@
 // dependencies import
 const express = require("express");
-const { getUsers, addUser } = require("../controller/usersController");
+const { getUsers, addUser, removeUser } = require("../controller/usersController");
 const avatarUpload = require("../middleware/users/avatarUpload");
 const {
   addUserValidator,
@@ -24,6 +24,9 @@ router.post(
   addUserValidationHandler,
   addUser
 );
+
+// remove user
+router.delete("/:id", removeUser);
 
 // export routes
 module.exports = router;

@@ -1,5 +1,6 @@
 // dependencies
 const bcrypt = require("bcrypt");
+const path = require("path");
 const User = require("../models/People");
 
 // users template rendering
@@ -50,5 +51,33 @@ async function addUser(req, res) {
   }
 }
 
+// remove user controller
+async function removeUser(req, res, next) {
+  try {
+    // fetch the user by id and delete
+    const user = await User.findByIdAndDelete({
+      _id: req.params.id
+    });
+
+    // remove the user avatar if any
+    if (user.avatar) {
+      unlink(
+        path.join(__dirname, `/../public/uploads/avatars/${filename}`),
+        (err) => {
+          if (err) console.log(err);
+        }
+      );
+    } 
+
+    res.status(200).json({
+      message: "User remove successfully."
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ errors: { common: { msg: "Could not delete the user." } } });
+  }
+}
+
 // exports module
-module.exports = { getUsers, addUser };
+module.exports = { getUsers, addUser, removeUser };
