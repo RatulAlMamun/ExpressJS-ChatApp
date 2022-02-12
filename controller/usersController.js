@@ -3,8 +3,18 @@ const bcrypt = require("bcrypt");
 const User = require("../models/People");
 
 // users template rendering
-function getUsers(req, res) {
-  res.render("users");
+async function getUsers(req, res, next) {
+  try {
+    // fetch all users
+    const users = await User.find();
+
+    // render template with user data
+    res.render("users", {
+      users: users,
+    });
+  } catch (error) {
+    next(error);
+  }
 }
 
 // add user controller
