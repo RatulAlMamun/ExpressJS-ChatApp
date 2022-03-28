@@ -65,8 +65,11 @@ const addUserValidationHandler = (req, res, next) => {
     if (req.files.length > 0) {
       // remove the uploaded files
       const { filename } = req.files[0];
+      console.log(
+        path.join(__dirname, `/../../public/uploads/avatars/${filename}`)
+      );
       unlink(
-        path.join(__dirname, `/../public/uploads/avatars/${filename}`),
+        path.join(__dirname, `/../../public/uploads/avatars/${filename}`),
         (err) => {
           if (err) console.log(err);
         }
