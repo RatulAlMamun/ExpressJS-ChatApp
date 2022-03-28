@@ -38,7 +38,7 @@ function uploader(subfolderPath, allowedFileTypes, maxFileSize, errorMessage) {
     },
     fileFilter: (req, file, cb) => {
       // check if file exists in allowedFileTypes array
-      if (allowedFileTypes.include(file.mimetype)) {
+      if (allowedFileTypes.includes(file.mimetype)) {
         cb(null, true);
       } else {
         cb(createError(errorMessage));
