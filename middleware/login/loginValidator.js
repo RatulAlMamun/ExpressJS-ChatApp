@@ -1,10 +1,10 @@
 // dependencies
-const { check } = require("express-validator");
+const { check, validationResult } = require("express-validator");
 
 // login validator logic
 const doLoginValidators = [
   check("username").isLength({ min: 1 }).withMessage("username is required."),
-  check("password").isLength({ min: 1 }.withMessage("password required.")),
+  check("password").isLength({ min: 1 }).withMessage("password required."),
 ];
 
 // validation handler
