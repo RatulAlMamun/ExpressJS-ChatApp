@@ -1,9 +1,9 @@
 // dependencies import
 const express = require("express");
-const { getLogin, login } = require("../controller/loginController");
+const { getLogin, login, logout } = require("../controller/loginController");
 const {
   doLoginValidators,
-  doLoginValidationHandler
+  doLoginValidationHandler,
 } = require("../middleware/login/loginValidator");
 const {
   decorateHtmlResponse,
@@ -26,6 +26,9 @@ router.post(
   doLoginValidationHandler,
   login
 );
+
+// logout
+router.delete("/", logout);
 
 // export routes
 module.exports = router;
