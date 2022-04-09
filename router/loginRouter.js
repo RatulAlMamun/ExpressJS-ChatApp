@@ -1,6 +1,5 @@
 // dependencies import
 const express = require("express");
-const { getLogin, login, logout } = require("../controller/loginController");
 const {
   doLoginValidators,
   doLoginValidationHandler,
@@ -8,6 +7,8 @@ const {
 const {
   decorateHtmlResponse,
 } = require("../middleware/common/decorateHtmlResponse");
+const { redirectLoggedIn } = require("../middleware/common/checkLogin");
+const { getLogin, login, logout } = require("../controller/loginController");
 
 // creating router instances for route setup
 const router = express.Router();
@@ -16,7 +17,7 @@ const router = express.Router();
 const pageTitle = "Login";
 
 // route
-router.get("/", decorateHtmlResponse(pageTitle), getLogin);
+router.get("/", decorateHtmlResponse(pageTitle), redirectLoggedIn getLogin);
 
 // process login
 router.post(

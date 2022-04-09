@@ -1,3 +1,4 @@
+const res = require("express/lib/response");
 const jwt = require("jsonwebtoken");
 
 const checkLogin = (req, res, next) => {
@@ -42,4 +43,14 @@ const checkLogin = (req, res, next) => {
   }
 };
 
-module.exports = checkLogin;
+const redirectLoggedIn = () => {
+  let cookies =
+    Object.keys(req.signedCookies).length > 0 ? req.signedCookies : null;
+  if (!cookies) {
+    next();
+  } else {
+    res.redirect("/inbox");
+  }
+};
+
+module.exports = { checkLogin, redirectLoggedIn };

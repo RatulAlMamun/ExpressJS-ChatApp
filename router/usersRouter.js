@@ -12,7 +12,7 @@ const {
 const {
   decorateHtmlResponse,
 } = require("../middleware/common/decorateHtmlResponse");
-const checkLogin = require("../middleware/common/checkLogin");
+const { checkLogin } = require("../middleware/common/checkLogin");
 const avatarUpload = require("../middleware/users/avatarUpload");
 
 // creating router instances for route setup
