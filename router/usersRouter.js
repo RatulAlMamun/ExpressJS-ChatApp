@@ -1,7 +1,10 @@
 // dependencies import
 const express = require("express");
-const { getUsers, addUser, removeUser } = require("../controller/usersController");
-const avatarUpload = require("../middleware/users/avatarUpload");
+const {
+  getUsers,
+  addUser,
+  removeUser,
+} = require("../controller/usersController");
 const {
   addUserValidator,
   addUserValidationHandler,
@@ -9,16 +12,19 @@ const {
 const {
   decorateHtmlResponse,
 } = require("../middleware/common/decorateHtmlResponse");
+const checkLogin = require("../middleware/common/checkLogin");
+const avatarUpload = require("../middleware/users/avatarUpload");
 
 // creating router instances for route setup
 const router = express.Router();
 
 // route
-router.get("/", decorateHtmlResponse("Users"), getUsers);
+router.get("/", decorateHtmlResponse("Users"), checkLogin, getUsers);
 
 // add user
 router.post(
   "/",
+  checkLogin,
   avatarUpload,
   addUserValidator,
   addUserValidationHandler,
