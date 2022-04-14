@@ -17,7 +17,7 @@ const router = express.Router();
 const pageTitle = "Login";
 
 // route
-router.get("/", decorateHtmlResponse(pageTitle), redirectLoggedIn getLogin);
+router.get("/", decorateHtmlResponse(pageTitle), redirectLoggedIn, getLogin);
 
 // process login
 router.post(
