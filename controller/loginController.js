@@ -14,7 +14,12 @@ async function login(req, res, next) {
   try {
     // find user by email or password
     const user = await User.findOne({
-      $or: [{ email: req.body.username }, { phone: req.body.username }],
+      $or: [
+        {
+          email: req.body.username,
+        },
+        { phone: req.body.username },
+      ],
     });
 
     if (user && user._id) {
@@ -27,10 +32,11 @@ async function login(req, res, next) {
       if (isValidPassword) {
         // prepare the user object to generate token
         const userObject = {
+          userid: user._id,
           username: user.name,
           email: user.email,
-          phone: user.phone,
-          role: "user",
+          role: user.role || "user",
+          avatar: user.avatar || null,
         };
 
         // generate token
@@ -46,7 +52,7 @@ async function login(req, res, next) {
         // set logged in user local identifier
         res.locals.loggedInUser = userObject;
 
-        res.render("inbox");
+        res.redirect("inbox");
       } else {
         throw createError("Login failed! Please try again.");
       }

@@ -1,6 +1,7 @@
 const res = require("express/lib/response");
 const jwt = require("jsonwebtoken");
 
+// auth guard to protect routes that need athentication
 const checkLogin = (req, res, next) => {
   let cookies =
     Object.keys(req.signedCookies).length > 0 ? req.signedCookies : null;
@@ -43,6 +44,7 @@ const checkLogin = (req, res, next) => {
   }
 };
 
+// redirect already logged in user to inbox page
 const redirectLoggedIn = (req, res, next) => {
   let cookies =
     Object.keys(req.signedCookies).length > 0 ? req.signedCookies : null;
