@@ -18,7 +18,9 @@ async function login(req, res, next) {
         {
           email: req.body.username,
         },
-        { phone: req.body.username },
+        {
+          mobile: req.body.username,
+        },
       ],
     });
 
