@@ -3,8 +3,7 @@ const uploader = require("../../utilities/multipleUploader");
 
 // attchment uploader makeMiddleware
 function attachmentUpload(req, res, next) {
-  const upload = up;
-  loader(
+  const upload = uploader(
     "attachments",
     ["image/jpeg", "image/jpg", "image/png"],
     1000000,
