@@ -55,4 +55,24 @@ const redirectLoggedIn = (req, res, next) => {
   }
 };
 
-module.exports = { checkLogin, redirectLoggedIn };
+// guard to protect the route for role base authentication
+const requireRole = (role) => {
+  return function (req, res, next) {
+    if (req.user.role && role.includes(req.user.role)) {
+      next();
+    } else {
+      if (res.locals.html) {
+        next(createError(401, "You are not authorize to access this page!"));
+      } else {
+        res.status(401).json({
+          errors: {
+            common: {
+              msg: "You are not authorize!",
+            },
+          },
+        });
+      }
+    }
+  };
+};
+module.exports = { checkLogin, redirectLoggedIn, requireRole };

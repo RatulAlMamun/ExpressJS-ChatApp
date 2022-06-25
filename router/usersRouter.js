@@ -12,19 +12,26 @@ const {
 const {
   decorateHtmlResponse,
 } = require("../middleware/common/decorateHtmlResponse");
-const { checkLogin } = require("../middleware/common/checkLogin");
 const avatarUpload = require("../middleware/users/avatarUpload");
+const { checkLogin, requireRole } = require("../middleware/common/checkLogin");
 
 // creating router instances for route setup
 const router = express.Router();
 
 // route
-router.get("/", decorateHtmlResponse("Users"), checkLogin, getUsers);
+router.get(
+  "/",
+  decorateHtmlResponse("Users"),
+  checkLogin,
+  requireRole(["admin"]),
+  getUsers
+);
 
 // add user
 router.post(
   "/",
   checkLogin,
+  requireRole(["admin"]),
   avatarUpload,
   addUserValidator,
   addUserValidationHandler,
@@ -32,7 +39,7 @@ router.post(
 );
 
 // remove user
-router.delete("/:id", removeUser);
+router.delete("/:id", requireRole(["admin"]), removeUser);
 
 // export routes
 module.exports = router;
