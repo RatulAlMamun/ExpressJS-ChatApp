@@ -35,3 +35,10 @@ Please follow the below instructions to run this project in your machine:
 ```sh
     npm run start
 ```
+
+## Admin Credentials
+
+```sh
+    username: admin@chatapp.com
+    password: pass@1234
+```
