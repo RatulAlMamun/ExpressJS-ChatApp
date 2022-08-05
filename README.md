@@ -12,7 +12,7 @@ Please follow the below instructions to run this project in your machine:
 
 2. go to the project directory
 
-````sh
+```sh
     cd ExpressJS-ChatApp
 ```
 
@@ -20,7 +20,7 @@ Please follow the below instructions to run this project in your machine:
 
 ```sh
     npm install
-````
+```
 
 4. Copy the `.env.example` file and rename it as `.env`
 
